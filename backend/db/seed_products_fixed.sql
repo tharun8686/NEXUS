@@ -1,7 +1,7 @@
 -- ============================================================
 -- NexusTech — 200 Real Products Seed (Local Directory Paths)
 -- ============================================================
-USE electronics_store;
+-- USE electronics_store;
 
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE products;

@@ -706,3 +706,4 @@ app.post('/api/checkout-v2', authenticateToken, async (req, res) => {
 
 // Start Server
 server.listen(3000, () => console.log('🚀 Server running on port 3000 (HTTP + WebSocket)'));
+module.exports = app;

@@ -5,8 +5,7 @@
 -- mysql -u root -pEricjoel@2006 electronics_store < db/schema.sql
 -- ============================================================
 
-USE electronics_store;
-
+-- USE electronics_store;
 -- ── USERS ─────────────────────────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS users (
   user_id    INT AUTO_INCREMENT PRIMARY KEY,
