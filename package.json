@@ -2,7 +2,6 @@
   "name": "nexustech-monorepo",
   "version": "1.0.0",
   "scripts": {
-    "build": "cd frontend && npm install && npm run build",
-    "install": "npm install && cd frontend && npm install && cd ../backend && npm install"
+    "build": "cd frontend && npm install && npm run build"
   }
 }
