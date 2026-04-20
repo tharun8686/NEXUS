@@ -31,7 +31,9 @@ const razorpay = new Razorpay({
 // ─────────────────────────────────────────────────────────────────────────────
 // AUTO-FETCH IMAGE CONFIGURATION
 // ─────────────────────────────────────────────────────────────────────────────
-const IMAGE_BASE_DIR = path.join(__dirname, '..', 'frontend', 'public', 'images', 'products');
+const IMAGE_BASE_DIR = process.env.VERCEL 
+  ? '/tmp' 
+  : path.join(__dirname, '..', 'frontend', 'public', 'images', 'products');
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST || 'localhost',
@@ -707,3 +709,13 @@ app.post('/api/checkout-v2', authenticateToken, async (req, res) => {
 // Start Server
 server.listen(3000, () => console.log('🚀 Server running on port 3000 (HTTP + WebSocket)'));
 module.exports = app;
+// 1. Export the app for Vercel
+module.exports = app;
+
+// 2. Only run app.listen if NOT running on Vercel
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3000;
+  server.listen(PORT, () => {
+    console.log(`Local server running on port ${PORT}`);
+  });
+}
