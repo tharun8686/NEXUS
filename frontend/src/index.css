@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-dark text-white overflow-x-hidden;
+  background-image: radial-gradient(circle at 50% 0%, #1a1a2e 0%, #000 100%);
+}
+
+@layer utilities {
+  .glass-nav {
+    @apply bg-black/40 border-b border-white/10;
+    /* Use backdrop-blur only on nav — not on every card */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .glass-card {
+    /* Removed backdrop-blur — too GPU-heavy when repeated 40+ times */
+    @apply bg-white/[0.03] border border-white/10 shadow-xl;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600;
+  }
+  /* Promote cards to their own compositor layer for smoother transforms */
+  .will-change-transform {
+    will-change: transform;
+  }
+  /* Hide scrollbar on category tabs */
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #222; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #444; }
+
+/* Smooth scrolling site-wide */
+html { scroll-behavior: smooth; }
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
