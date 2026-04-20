@@ -13,12 +13,12 @@
   ],
   "rewrites": [
     {
-      "source": "/api/((.*))",
+      "source": "/api/(.*)",
       "destination": "frontend/api/server.js"
     },
     {
       "source": "/(.*)",
-      "destination": "frontend/dist/$1"
+      "destination": "frontend/$1"
     }
   ]
 }
