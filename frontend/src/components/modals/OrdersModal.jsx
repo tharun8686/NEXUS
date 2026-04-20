@@ -10,8 +10,8 @@ import {
 import { formatPrice } from '../../utils/currency';
 import toast from 'react-hot-toast';
 
-const WS_URL  = 'ws://localhost:3000';
-const API_URL = 'http://localhost:3000';
+const WS_URL  = window.location.protocol === 'https:' ? `wss://${window.location.host}` : `ws://${window.location.host}`;
+const API_URL = window.location.origin;
 
 // ── Status config ─────────────────────────────────────────────────────────────
 const STATUS_CONFIG = {

@@ -1,7 +1,8 @@
 // src/components/SentimentBadge.jsx
 // Self-contained AI sentiment badge for product cards and modals.
 // Fetches & caches sentiment; no prop drilling needed beyond productId.
-
+// Add this at the top with your other imports
+import api from '../utils/api';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ThumbsUp, ThumbsDown, Minus, Sparkles, MessageSquare } from 'lucide-react';
@@ -64,7 +65,7 @@ export default function SentimentBadge({
     }
 
     let alive = true;
-    axios.get(`http://localhost:3000/api/sentiment/${productId}`)
+    api.get(`/api/sentiment/${productId}`)
       .then(({ data: d }) => {
         if (!alive) return;
         cache[productId] = d;
@@ -137,10 +138,7 @@ export async function preloadSentiment(productIds) {
   const missing = productIds.filter(id => !cache[id]);
   if (!missing.length) return;
   try {
-    const { data } = await axios.post(
-      'http://localhost:3000/api/sentiment/batch',
-      { productIds: missing }
-    );
+    const { data } = await api.post('/api/sentiment/batch', { productIds: missing });
     Object.entries(data).forEach(([id, s]) => { cache[Number(id)] = s; });
   } catch (_) {}
 }

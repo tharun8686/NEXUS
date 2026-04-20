@@ -9,7 +9,9 @@ import {
 } from 'lucide-react';
 import api from '../utils/api';
 
-const WS_URL = 'ws://localhost:3000';
+const WS_URL = window.location.protocol === 'https:' 
+  ? `wss://${window.location.host}` 
+  : `ws://${window.location.host}`;
 
 function formatTime(dateStr) {
   const d = new Date(dateStr);

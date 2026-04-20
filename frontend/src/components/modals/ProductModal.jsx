@@ -1,4 +1,5 @@
 // src/components/ProductModal.jsx — FINAL (sentiment panel + share + stock alert)
+import api from '../../utils/api';
 import { motion } from 'framer-motion';
 import { X, ShoppingCart, Send, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -20,7 +21,7 @@ export default function ProductModal({
 
   const fetchReviews = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:3000/api/reviews/${product.product_id}`);
+      const { data } = await api.get(`/api/reviews/${product.product_id}`);
       setReviews(data);
     } catch (err) { console.error(err); }
   };
@@ -31,7 +32,7 @@ export default function ProductModal({
     try {
       const user  = JSON.parse(localStorage.getItem('user'));
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:3000/api/reviews',
+      await api.post('/api/reviews',
         { product_id: product.product_id, rating: newReview.rating, comment: newReview.comment },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -39,7 +40,7 @@ export default function ProductModal({
       setNewReview({ rating: 5, comment: '' });
       // Bust local + server sentiment cache
       bustSentimentCache(product.product_id);
-      axios.post('http://localhost:3000/api/reviews/sentiment-refresh',
+      api.post('/api/reviews/sentiment-refresh',
         { product_id: product.product_id },
         { headers: { Authorization: `Bearer ${token}` } }
       ).catch(() => {});

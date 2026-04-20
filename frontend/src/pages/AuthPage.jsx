@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Mail, Lock, User, ArrowRight, Loader2, AlertCircle,
@@ -109,7 +109,7 @@ export default function AuthPage({ setUser }) {
       const payload = isLogin
         ? formData
         : { ...formData, dialCode: getDialInfo(formData.country).code };
-      const { data } = await axios.post(`http://localhost:3000${endpoint}`, payload);
+      const { data } = await api.post(endpoint, payload);
 
       if (isLogin) {
         localStorage.setItem('user', JSON.stringify(data.user));

@@ -1,3 +1,4 @@
+import api from '../../utils/api';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
@@ -86,7 +87,7 @@ export default function ProfileModal({ user, onClose, onUpdate, defaultTab = 'in
       const token = localStorage.getItem('token');
       const dial  = getDialInfo(form.country);
       const payload = { ...form, phone: form.phone ? `${dial.code}${form.phone}` : '' };
-      const { data } = await axios.put('http://localhost:3000/api/profile', payload, {
+      const { data } = await api.put('/api/profile', payload, {
         headers: { Authorization: `Bearer ${token}` }
       });
       // Update localStorage and parent state
@@ -111,7 +112,7 @@ export default function ProfileModal({ user, onClose, onUpdate, defaultTab = 'in
     setSaving(true); setFeedback(null);
     try {
       const token = localStorage.getItem('token');
-      await axios.put('http://localhost:3000/api/profile/password',
+      await API.put('/api/profile/password',
         { currentPassword: pwForm.currentPassword, newPassword: pwForm.newPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );

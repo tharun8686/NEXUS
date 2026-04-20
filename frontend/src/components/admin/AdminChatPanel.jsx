@@ -10,8 +10,10 @@ import {
 } from 'lucide-react';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000';
-const WS_URL  = 'ws://localhost:3000';
+const API_URL = window.location.origin;
+const WS_URL  = window.location.protocol === 'https:' 
+  ? `wss://${window.location.host}` 
+  : `ws://${window.location.host}`;
 
 function formatTime(dateStr) {
   const d = new Date(dateStr);

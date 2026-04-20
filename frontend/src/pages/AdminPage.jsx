@@ -16,8 +16,10 @@ import toast, { Toaster } from 'react-hot-toast';
 import AdminChatPanel from '../components/admin/AdminChatPanel';
 import AdminPromoPanel from '../components/admin/AdminPromoPanel'; 
 
-const API    = 'http://localhost:3000/api/admin';
-const WS_URL = 'ws://localhost:3000';
+const API    = '/api/admin';
+const WS_URL = window.location.protocol === 'https:' 
+  ? `wss://${window.location.host}` 
+  : `ws://${window.location.host}`;
 
 const ORDER_STATUSES = [
   'Pending','Confirmed','Processing','Packed',

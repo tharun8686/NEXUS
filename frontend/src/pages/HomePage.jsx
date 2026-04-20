@@ -132,7 +132,7 @@ export default function HomePage({ user, setUser, cart: cartProp, setCart: setCa
 
   const fetchProducts = useCallback(async () => {
     try {
-      const { data } = await axios.get('http://localhost:3000/api/products');
+      const { data } = await api.get('/api/products');
       setProducts(data);
       productsRef.current = data;
       setFilteredDocs(sortProducts(applyFilters(data, activeCatRef.current, searchRef.current), sortKeyRef.current));

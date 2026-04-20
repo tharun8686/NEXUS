@@ -13,7 +13,7 @@ export default function AdminLoginPage({ setAdminToken }) {
     setLoading(true);
     setError('');
     try {
-      const { data } = await axios.post('http://localhost:3000/api/admin/login', form);
+      const { data } = await axios.post('/api/admin/login', form);
       localStorage.setItem('adminToken', data.token);
       setAdminToken(data.token);
     } catch (err) {
