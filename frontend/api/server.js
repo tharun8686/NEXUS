@@ -31,7 +31,9 @@ const razorpay = new Razorpay({
 // ─────────────────────────────────────────────────────────────────────────────
 // AUTO-FETCH IMAGE CONFIGURATION
 // ─────────────────────────────────────────────────────────────────────────────
-const IMAGE_BASE_DIR = path.join(__dirname, '..', 'frontend', 'public', 'images', 'products');
+const IMAGE_BASE_DIR = process.env.VERCEL 
+  ? '/tmp' 
+  : path.join(__dirname, '..', 'public', 'images', 'products');
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST || 'localhost',
