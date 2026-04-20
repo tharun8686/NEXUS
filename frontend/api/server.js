@@ -31,6 +31,7 @@ const razorpay = new Razorpay({
 // ─────────────────────────────────────────────────────────────────────────────
 // AUTO-FETCH IMAGE CONFIGURATION
 // ─────────────────────────────────────────────────────────────────────────────
+// Updated for the new folder structure
 const IMAGE_BASE_DIR = process.env.VERCEL 
   ? '/tmp' 
   : path.join(__dirname, '..', 'public', 'images', 'products');
